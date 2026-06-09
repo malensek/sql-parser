@@ -201,6 +201,14 @@ Expr* Expr::makeColumnRef(char* table, char* name) {
   return e;
 }
 
+Expr* Expr::makeColumnRef(char* schema, char* table, char* name) {
+  Expr* e = new Expr(kExprColumnRef);
+  e->name = name;
+  e->table = table;
+  e->schema = schema;
+  return e;
+}
+
 Expr* Expr::makeStar(void) {
   Expr* e = new Expr(kExprStar);
   return e;

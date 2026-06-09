@@ -1230,6 +1230,7 @@ between_expr : operand BETWEEN operand AND operand { $$ = Expr::makeBetween($1, 
 
 column_name : IDENTIFIER { $$ = Expr::makeColumnRef($1); }
 | IDENTIFIER '.' IDENTIFIER { $$ = Expr::makeColumnRef($1, $3); }
+| IDENTIFIER '.' IDENTIFIER '.' IDENTIFIER { $$ = Expr::makeColumnRef($1, $3, $5); }
 | '*' { $$ = Expr::makeStar(); }
 | IDENTIFIER '.' '*' { $$ = Expr::makeStar($1); };
 

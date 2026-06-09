@@ -195,6 +195,8 @@ struct Expr {
 
   static Expr* makeColumnRef(char* table, char* name);
 
+  static Expr* makeColumnRef(char* schema, char* table, char* name);
+
   static Expr* makeStar(void);
 
   static Expr* makeStar(char* table);
