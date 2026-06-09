@@ -47,6 +47,16 @@ TEST(SelectExprTest) {
   ASSERT_STREQ(stmt->selectList->at(2)->exprList->at(1)->exprList->at(0)->getName(), "un");
 }
 
+TEST(SelectThreePartColumnRefTest) {
+  TEST_PARSE_SINGLE_SQL("SELECT catalog.students.grade FROM students;", kStmtSelect, SelectStatement, result, stmt);
+
+  ASSERT_EQ(stmt->selectList->size(), 1);
+  ASSERT(stmt->selectList->at(0)->isType(kExprColumnRef));
+  ASSERT_STREQ(stmt->selectList->at(0)->schema, "catalog");
+  ASSERT_STREQ(stmt->selectList->at(0)->table, "students");
+  ASSERT_STREQ(stmt->selectList->at(0)->name, "grade");
+}
+
 TEST(SelectUnaryMinusTest) {
   TEST_PARSE_SINGLE_SQL(
       "SELECT 10 - 20, 10 + -20, 10 +-20, 10+-20, 9223372036854775807, -9223372036854775808, 10-5.2, 10+-5.2",
